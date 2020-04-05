@@ -1,0 +1,14 @@
+name: 'Inject copyright'
+branding:
+  icon: 'edit'
+  color: 'green'
+description: 'Inject copyright info into css and js files in your dist folder.'
+author: 'Bendy Zhang'
+inputs:
+  dist:
+    required: false
+    description: 'your dist folder, default is dist folder in root'
+    default: 'dist'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
