@@ -1,4 +1,11 @@
-module.exports = {
+/**!
+   * @bndynet/github-action-inject-copyright v0.0.0
+   * git+https://github.com/bndynet/github-action-inject-copyright.git
+   *
+   * Copyright (c) 2020 undefined
+   * Released under the MIT license
+   */
+  module.exports = {
   clearMocks: true,
   moduleFileExtensions: ['js', 'ts'],
   testEnvironment: 'node',

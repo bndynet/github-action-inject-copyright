@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
+  "name": "@bndynet/github-action-inject-copyright",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "Inject copyright, version and license info to html, css and js files",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -15,17 +15,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/bndynet/github-action-inject-copyright.git"
   },
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "copyright",
+    "version",
+    "license"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.2.6",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

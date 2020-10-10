@@ -1,14 +1,12 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import {injectCopyright} from './inject-copyright'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const folder: string = core.getInput('dist')
+    core.debug(`Your dist folder is ${folder||'dist'}...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    injectCopyright(folder)
 
     core.setOutput('time', new Date().toTimeString())
   } catch (error) {
