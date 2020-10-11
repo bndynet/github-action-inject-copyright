@@ -7,6 +7,8 @@ export function injectCopyright(distFolder?: string): void {
   cd(distFolder || 'dist')
   for (const file of ls('*.*')) {
     if (file.endsWith('.js') || file.endsWith('.css')) {
+      echo(`-> ${file}...`)
+
       let data = readFileSync(file, 'utf8')
       const copyright = `/**!
    * ${pkg.name} v${pkg.version}
