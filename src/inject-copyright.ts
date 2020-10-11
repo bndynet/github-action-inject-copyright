@@ -3,9 +3,13 @@ import {echo, cd, ls} from 'shelljs'
 const pkg = JSON.parse(readFileSync('package.json', 'utf-8'))
 
 export function injectCopyright(distFolder?: string): void {
-  echo('⚑ copyright injecting...')
+  if (!distFolder) {
+    distFolder = 'dist'
+  }
+  echo(`⚑ copyright injecting in ${distFolder}...`)
   cd(distFolder || 'dist')
-  for (const file of ls('*.*')) {
+  for (const file of ls(`./${distFolder}/**/*.*`)) {
+    echo(`-> ${file}...`)
     if (file.endsWith('.js') || file.endsWith('.css')) {
       echo(`-> ${file}...`)
 
