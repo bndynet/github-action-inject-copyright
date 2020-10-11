@@ -717,7 +717,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const folder = core.getInput('dist');
-            core.debug(`Your dist folder is ${folder}...`); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+            core.debug(`Your dist folder is ${folder || 'dist'}...`); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
             inject_copyright_1.injectCopyright(folder);
             core.setOutput('time', new Date().toTimeString());
         }
@@ -4224,15 +4224,15 @@ module.exports = _toEnd;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.injectCopyright = void 0;
-const fs = __webpack_require__(747);
-const sh = __webpack_require__(516);
-const pkg = JSON.parse(fs.readFileSync('package.json'));
+const fs_1 = __webpack_require__(747);
+const shelljs_1 = __webpack_require__(516);
+const pkg = JSON.parse(fs_1.readFileSync('package.json', 'utf-8'));
 function injectCopyright(distFolder) {
-    sh.echo('⚑ copyright injecting...');
-    sh.cd(distFolder || 'dist');
-    sh.ls('*.*').forEach((file) => {
+    shelljs_1.echo('⚑ copyright injecting...');
+    shelljs_1.cd(distFolder || 'dist');
+    for (const file of shelljs_1.ls('*.*')) {
         if (file.endsWith('.js') || file.endsWith('.css')) {
-            let data = fs.readFileSync(file, 'utf8');
+            let data = fs_1.readFileSync(file, 'utf8');
             const copyright = `/**!
    * ${pkg.name} v${pkg.version}
    * ${pkg.repository.url}
@@ -4242,15 +4242,11 @@ function injectCopyright(distFolder) {
    */
   `;
             data = `${copyright}${data}`;
-            fs.writeFileSync(file, data, (werr) => {
-                if (werr) {
-                    throw werr;
-                }
-            });
+            fs_1.writeFileSync(file, data);
         }
-    });
-    sh.cd('../');
-    sh.echo(`✔ done at ${new Date().toISOString()}`);
+    }
+    shelljs_1.cd('../');
+    shelljs_1.echo(`✔ done at ${new Date().toISOString()}`);
 }
 exports.injectCopyright = injectCopyright;
 
