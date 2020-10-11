@@ -4228,10 +4228,15 @@ const fs_1 = __webpack_require__(747);
 const shelljs_1 = __webpack_require__(516);
 const pkg = JSON.parse(fs_1.readFileSync('package.json', 'utf-8'));
 function injectCopyright(distFolder) {
-    shelljs_1.echo('⚑ copyright injecting...');
+    if (!distFolder) {
+        distFolder = 'dist';
+    }
+    shelljs_1.echo(`⚑ copyright injecting in ${distFolder}...`);
     shelljs_1.cd(distFolder || 'dist');
-    for (const file of shelljs_1.ls('*.*')) {
+    for (const file of shelljs_1.ls(`./${distFolder}/**/*.*`)) {
+        shelljs_1.echo(`-> ${file}...`);
         if (file.endsWith('.js') || file.endsWith('.css')) {
+            shelljs_1.echo(`-> ${file}...`);
             let data = fs_1.readFileSync(file, 'utf8');
             const copyright = `/**!
    * ${pkg.name} v${pkg.version}
