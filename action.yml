@@ -10,5 +10,5 @@ inputs:
     description: 'your dist folder, default is dist folder in root'
     default: 'dist'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'

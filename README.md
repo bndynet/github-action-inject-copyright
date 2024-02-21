@@ -7,7 +7,7 @@ Inject author, version and license informations that is from package.json file i
       run: npm run build
 
     - name: Inject copyright and version
-      uses: bndynet/github-action-inject-copyright@v1
+      uses: bndynet/github-action-inject-copyright@v2
       with:
         dist: dist  # optional, default is dist folder
 ```
